@@ -7,6 +7,8 @@ const User = require("./models/user");
 const Note = require("./models/notes");
 const auth = require("./auth/auth");
 const jwt = require("jsonwebtoken");
+const cors = require('cors');
+app.use(cors());
 app.use(require("./routes/notes"));
 //connect to the database
 dbConnect();
