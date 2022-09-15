@@ -8,7 +8,13 @@ const Note = require("./models/notes");
 const auth = require("./auth/auth");
 const jwt = require("jsonwebtoken");
 const cors = require('cors');
-app.use(cors());
+
+
+const corsOptions = {
+  origin : 'http://localhost:3000',
+  optionSuccessStatus: 200
+}
+app.use(cors(corsOptions));
 app.use(require("./routes/notes"));
 //connect to the database
 dbConnect();
