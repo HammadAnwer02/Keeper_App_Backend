@@ -29,6 +29,10 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+app.get("/", (req, res) => {
+  res.json({messsage: "Hello! I am your server!"});
+})
 // register endpoint
 app.post("/register", (request, response) => {
     // hash the password
