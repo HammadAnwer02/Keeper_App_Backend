@@ -9,9 +9,15 @@ const auth = require("./auth/auth");
 const jwt = require("jsonwebtoken");
 const cors = require('cors');
 
-
+const whitelist = ['http://localhost:3000', 'https://keeper-app-hammad.netlify.app']
 const corsOptions = {
-  origin : 'http://localhost:3000',
+  origin : function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
   credentials: true,
   optionSuccessStatus: 200
 }
