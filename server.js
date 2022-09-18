@@ -66,6 +66,14 @@ app.post("/register", (request, response) => {
           .save()
           // return success if the new user is added to the database successfully
           .then((result) => {
+            const token = jwt.sign(
+              {
+                  userId: user._id,
+                  userEmail: user.email,
+              },
+              "RANDOM-TOKEN",
+              {expiresIn: "24h"}
+          );
             response.status(201).send({
               message: "User Created Successfully",
               result,
