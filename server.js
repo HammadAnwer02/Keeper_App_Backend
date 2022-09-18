@@ -9,7 +9,7 @@ const auth = require("./auth/auth");
 const jwt = require("jsonwebtoken");
 const cors = require('cors');
 
-const whitelist = ['http://localhost:3000', 'https://keeper-app-hammad.netlify.app']
+const whitelist = ['http://localhost:3000', 'https://keeper-app-hammad.netlify.app', 'https://keeperapp-hammad.herokuapp.com/']
 const corsOptions = {
   origin : function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
