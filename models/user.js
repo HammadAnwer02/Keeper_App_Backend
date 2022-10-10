@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require('bcrypt');
 
 //userSchema 
 const userSchema = new mongoose.Schema({
@@ -11,8 +12,36 @@ const userSchema = new mongoose.Schema({
     // password field
     password : {
         type: String, 
-        required: true,
+        required: false,
     },
+    notes : [{type: mongoose.Schema.Types.ObjectId, ref: 'Note'}],
+    googleId : String,
+    // facebookId : String
 })
 
-module.exports = mongoose.model.User || mongoose.model("User", userSchema);
+
+userSchema.pre('save',function(next){
+    if(!this.isModified('password'))
+        return next();
+    bcrypt.hash(this.password,10,(err,passwordHash)=>{
+        if(err)
+            return next(err);
+        this.password = passwordHash;
+        next();
+    });
+});
+
+userSchema.methods.comparePassword = function(password,cb){
+    bcrypt.compare(password,this.password,(err,isMatch)=>{
+        if(err)
+            return cb(err);
+        else{
+            if(!isMatch)
+                return cb(null,isMatch);
+            return cb(null,this);
+        }
+    });
+}
+
+
+module.exports = mongoose.model("User", userSchema);

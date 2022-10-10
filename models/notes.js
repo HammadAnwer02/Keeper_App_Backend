@@ -9,8 +9,7 @@ const noteSchema = new mongoose.Schema({
     type: String,
     required: [true, "Content is required"],
   },
-  author : {type: Schema.Types.ObjectId, ref: "User"}
 });
 
 
-module.exports = mongoose.model.Note || mongoose.model("Note", noteSchema);
+module.exports = mongoose.model("Note", noteSchema);
