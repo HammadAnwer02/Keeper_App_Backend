@@ -111,30 +111,30 @@ userRouter.get(
   passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
-userRouter.get(
-  "/auth/google/notes",
-  passport.authenticate("google", {
-    failureRedirect: "http://localhost:3000/login",
-    session : false
-  }),
-  async (req, res) => {
-    if (req.isAuthenticated()) {
-      const { _id, email } = req.user;
+// userRouter.get(
+//   "/auth/google/notes",
+//   passport.authenticate("google", {
+//     failureRedirect: "http://localhost:3000/login",
+//     session : false
+//   }),
+//   async (req, res) => {
+//     if (req.isAuthenticated()) {
+//       const { _id, email } = req.user;
 
-      const token = jwt.sign(
-        {
-          userId: _id,
-        },
-        process.env.SECRET,
-        { expiresIn: "24h" }
-      );
+//       const token = jwt.sign(
+//         {
+//           userId: _id,
+//         },
+//         process.env.SECRET,
+//         { expiresIn: "24h" }
+//       );
 
-      res.cookie(process.env.SECRET, token);
+//       res.cookie(process.env.SECRET, token);
 
-      res.redirect("http://localhost:3000");
-    }
-  }
-);
+//       res.redirect("http://localhost:3000");
+//     }
+//   }
+// );
 
 userRouter.get(
   "/logout",
@@ -251,7 +251,7 @@ userRouter.get(
 
 const checkAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) { return next() }
-  res.redirect("http://localhost:3000/login");
+  res.redirect("https://keeper-app-hammad.netlify.app/login");
 }
 
 userRouter.get(
