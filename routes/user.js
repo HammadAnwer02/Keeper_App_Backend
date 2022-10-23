@@ -9,14 +9,36 @@ const Note = require("../models/notes");
 const jwt = require("jsonwebtoken");
 const bodyParser = require("body-parser");
 const dbConnect = require("../db/conn");
-const cors = require("cors");
-const corsOptions = {
-  origins: "https://keeper-app-hammad.netlify.app",
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
-};
+
+
+
+// const cors = require("cors");
+// const corsOptions = {
+//   origins: "https://keeper-app-hammad.netlify.app",
+//   credentials: true, //access-control-allow-credentials:true
+//   optionSuccessStatus: 200,
+// };
+// userRouter.use(cors(corsOptions));
 dbConnect();
-userRouter.use(cors(corsOptions));
+
+userRouter.use(function (req, res, next) {
+
+  // Website you wish to allow to connect
+  res.setHeader('Access-Control-Allow-Origin', '*');
+
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
+  // Pass to next layer of middleware
+  next();
+});
 
 userRouter.use(cookieParser());
 userRouter.use(bodyParser.json());
