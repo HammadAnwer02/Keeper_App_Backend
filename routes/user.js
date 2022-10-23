@@ -11,10 +11,11 @@ const bodyParser = require("body-parser");
 const dbConnect = require("../db/conn");
 const cors = require("cors");
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origins: "https://keeper-app-hammad.netlify.app/",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
+dbConnect();
 userRouter.use(cors(corsOptions));
 
 userRouter.use(cookieParser());
@@ -32,7 +33,6 @@ userRouter.use(
 userRouter.use(passport.initialize());
 userRouter.use(passport.session());
 
-dbConnect();
 
 const signToken = (userId) => {
   return jwt.sign(
