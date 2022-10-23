@@ -11,7 +11,7 @@ const bodyParser = require("body-parser");
 const dbConnect = require("../db/conn");
 const cors = require("cors");
 const corsOptions = {
-  origins: "https://keeper-app-hammad.netlify.app/",
+  origins: "https://keeper-app-hammad.netlify.app",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
